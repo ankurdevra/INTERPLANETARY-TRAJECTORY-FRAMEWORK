@@ -6,7 +6,7 @@
 % done with regards to ICRF frame. Furthermore, planetocentric frames of
 % reference around Earth, Jupiter, Saturn and Uranus are also considered
 % during the analysis. The trajectory was numerically plotted using a RK4
-% gravitational numerical integrator.
+% gravitational numerical integrator .
 clc;clear;format long
 %%
 % save('Final_Trajectory_Analysis')
