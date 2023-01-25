@@ -6,7 +6,7 @@
 % done with regards to ICRF frame. Furthermore, planetocentric frames of
 % reference around Earth, Jupiter, Saturn and Uranus are also considered
 % during the analysis. The trajectory was numerically plotted using a RK4
-% gravitational numerical integrator .
+% gravitational numerical integrator.
 clc;clear;format long
 %%
 % save('Final_Trajectory_Analysis')
@@ -199,7 +199,7 @@ Jupiter_Uranus_Departure_State_Vector = (Feasable_Matrix_Jupiter_Uranus_Trajecto
 Jupiter_Uranus_Arrival_State_Vector = Feasable_Matrix_Jupiter_Uranus_Trajectory(index_==1,13:18);
 [Uranus_Position_Arrival,Uranus_Velocity_Arrival] = planetEphemeris(Jupiter_Uranus_Trajectory_Optimum(6),'Sun','Uranus','432t');
 [X_Jupiter_Uranus_spacecraft_orbit,Y_Jupiter_Uranus_spacecraft_orbit,Z_Jupiter_Uranus_spacecraft_orbit,VX_Jupiter_Uranus_spacecraft_orbit,VY_Jupiter_Uranus_spacecraft_orbit,VZ_Jupiter_Uranus_spacecraft_orbit] = RK4_Gravitational_numerical_integrator(Jupiter_Uranus_Departure_State_Vector,(Jupiter_Uranus_Trajectory_Optimum(6)-Jupiter_Departure_Julian_Date)*24,'Sun');
-%% SATURN GRAVITY ASSIST
+% SATURN GRAVITY ASSIST
 mu_Saturn = 37931187; % km^3/sec^2 gravitational prameter of saturn
 h_1_Saturn = Jupiter_Saturn_Trajectory_Optimum(1); % km^2/sec, Angular momentum of heliocentric approach trajectory to saturn
 e_1_Saturn = Jupiter_Saturn_Trajectory_Optimum(3); % eccentricity of heliocentric approach trajectory
@@ -292,6 +292,23 @@ plot3(Uranus_Position_Arrival(1),Uranus_Position_Arrival(2),Uranus_Position_Arri
 title('Probe 2:Earth-Jupiter-Uranus Trajectory in ICRF frame')
 xlabel('X [km]');ylabel('Y [km]');zlabel('Z [km]')
 legend('Earth Orbit','Jupiter orbit','Uranus Orbit','Earth-Jupiter Spacecraft Coasting Orbit','Jupiter-Uranus Spacecraft Coasting Orbit','Sun','Earth Position at Launch','Jupiter Position at Arrival','Uranus Position at Arrival')
+% Plots the combine trajectory of probe 1&2
+figure(7)
+plot3(Earth_Position_ICRF(:,1),Earth_Position_ICRF(:,2),Earth_Position_ICRF(:,3),'b');grid on; hold on; % Earth orbit in ICRF frame
+plot3(Jupiter_Position_ICRF(:,1),Jupiter_Position_ICRF(:,2),Jupiter_Position_ICRF(:,3),'r'); % Jupiter orbit in ICRF frame
+plot3(Saturn_Arrival_Position_Vector_ICRF(:,1),Saturn_Arrival_Position_Vector_ICRF(:,2),Saturn_Arrival_Position_Vector_ICRF(:,3),'m'); % Saturn orbit in ICRF frame
+plot3(Uranus_Arrival_Position_Vector_ICRF(:,1),Uranus_Arrival_Position_Vector_ICRF(:,2),Uranus_Arrival_Position_Vector_ICRF(:,3),'y'); % Uranus orbit in ICRF frame
+plot3(X_Earth_Jupiter_spacecraft_orbit,Y_Earth_Jupiter_spacecraft_orbit,Z_Earth_Jupiter_spacecraft_orbit,'k'); % Earth Jupiter Spacecraft orbit
+plot3(X_Jupiter_Saturn_spacecraft_orbit,Y_Jupiter_Saturn_spacecraft_orbit,Z_Jupiter_Saturn_spacecraft_orbit,'g') % Jupiter Saturn Spcecraft orbit
+plot3(X_Jupiter_Uranus_spacecraft_orbit,Y_Jupiter_Uranus_spacecraft_orbit,Z_Jupiter_Uranus_spacecraft_orbit,'c') % Jupiter Uranus Spacecraft orbit
+plot3(0,0,0, 'o', 'MarkerFaceColor', 'y') % yellow dot representing sun, not to scale
+plot3(Position_Earth_Launch(1),Position_Earth_Launch(2),Position_Earth_Launch(3), 'o', 'MarkerFaceColor', 'b'); % earth position at launch
+plot3(Position_Jupiter_Arrival(1),Position_Jupiter_Arrival(2),Position_Jupiter_Arrival(3), 'o', 'MarkerFaceColor', 'r') % jupiter position at arrival
+plot3(Saturn_Position_Arrival(1),Saturn_Position_Arrival(2),Saturn_Position_Arrival(3),'o', 'MarkerFaceColor', 'm') % saturn position at arrival
+plot3(Uranus_Position_Arrival(1),Uranus_Position_Arrival(2),Uranus_Position_Arrival(3),'o','MarkerFaceColor', "#A2142F")% Uranus position at arrival
+title('Probe 1:Earth-Jupiter-Saturn Trajectory in ICRF frame and Probe 2:Earth-Jupiter-Uranus Trajectory in ICRF frame')
+xlabel('X [km]');ylabel('Y [km]');zlabel('Z [km]')
+legend('Earth Orbit','Jupiter orbit','Saturn Orbit','Uranus Orbit','Earth-Jupiter Spacecraft Coasting Orbit','Jupiter-Saturn Spacecraft Coasting Orbit','Jupiter-Uranus Spacecraft Coasting Orbit','Sun','Earth Position at Launch','Jupiter Position at Arrival','Saturn Position at Arrival','Uranus Position at Arrival')
 % Outputs of launch and arrival dates and flyby delta-v gain.
 Final_Earth_Launch_Date = ['Earth Launch Date: ',string(Achievable_Earth_Launch_Date_string)];disp(Final_Earth_Launch_Date);
 Final_Earth_Hyperbolic_Launch_Velocity = ['Hyperbolic Departure Velocity From Earth: ',num2str(Achivable_Earth_Departure_Hyperbolic_Velocity),'km/sec'];disp(Final_Earth_Hyperbolic_Launch_Velocity);
