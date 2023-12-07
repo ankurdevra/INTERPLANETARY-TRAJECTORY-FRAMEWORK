@@ -166,6 +166,6 @@ hold off
         r1_=sqrt((y(1) + (pi_2*r12))^2 + y(2)^2 + y(3)^2);% km  distance of space craft from earth
         r2_=sqrt((y(1) - (pi_1*r12))^2 + y(2)^2 + y(3)^2);% km  distance of space craft from moon
         % dydt contain velocity and acceleration of spacecraft 
-        dydt=[y(4); y(5); y(6); 2*Omega*y(5) + y(1)*Omega^2 - (mu1/r1_^3)*(y(1)+(pi_2*r12)) - (mu2/r2_^3)*(y(1)-(pi_2*r12));-2*Omega*y(4) + y(2)*Omega^2 - (mu1/r1_^3)*(y(2)) - (mu2/r2_^3)*(y(2)); -(mu1/r1_^3)*(y(3)) - (mu2/r2_^3)*(y(3))];% State vector derivative
+        dydt=[y(4); y(5); y(6); 2*Omega*y(5) + y(1)*Omega^2 - (mu1/r1_^3)*(y(1)+(pi_2*r12)) - (mu2/r2_^3)*(y(1)-(pi_1*r12));-2*Omega*y(4) + y(2)*Omega^2 - (mu1/r1_^3)*(y(2)) - (mu2/r2_^3)*(y(2)); -(mu1/r1_^3)*(y(3)) - (mu2/r2_^3)*(y(3))];% State vector derivative
     end
 end
